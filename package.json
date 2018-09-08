@@ -19,6 +19,7 @@
     "babel-loader": "7.1.2",
     "babel-preset-react-app": "^3.1.1",
     "babel-runtime": "6.26.0",
+    "bancor-contracts": "github:bancorprotocol/contracts",
     "bootstrap": "^4.1.3",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
     "chalk": "1.1.3",
