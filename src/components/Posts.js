@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import PropTypes from "proptypes/src";
 import {drizzleConnect} from "drizzle-react";
+import {Post} from "./Post";
+const IPFS = require('ipfs');
+
 
 class Posts extends Component {
 
@@ -12,19 +15,32 @@ class Posts extends Component {
         this.state = {
             posts: []
         };
+        const node = new IPFS();
 
-        //get past events
-        const redditCashInstance = new context.drizzle.web3.eth.Contract(this.contracts.RedditCash.abi, this.contracts.RedditCash.address);
-        redditCashInstance.getPastEvents('Publish', {
-            fromBlock: 0,
-            toBlock: 'latest'
-        }, ((error, logs) => {
-            logs.map((log) => {
-                const ipfsHash = log.returnValues.ipfsHash;
-                console.log(`ipfsHash: ${ipfsHash}`);
-                return log;
-            })
-        }));
+        node.on('ready', () => {
+            //get past events
+            const redditCashInstance = new context.drizzle.web3.eth.Contract(this.contracts.RedditCash.abi, this.contracts.RedditCash.address);
+            redditCashInstance.getPastEvents('Publish', {
+                fromBlock: 0,
+                toBlock: 'latest'
+            }, ((error, logs) => {
+                logs.map((log) => {
+                    const ipfsHash = log.returnValues.ipfsHash;
+                    node.files.cat(ipfsHash, (error, data) => {
+                        if(!error) {
+                            const raw = JSON.parse(data.toString());
+                            const {title, contents} = raw;
+                            this.setState({
+                                posts: [...this.state.posts, {title, contents}]
+                            });
+                        }
+                    });
+                    return log;
+                })
+            }));
+        });
+
+
 
         //setup listener for any events coming in
     }
@@ -32,7 +48,9 @@ class Posts extends Component {
     render() {
         return (
            <div>
-
+               {this.state.posts.map((post, index) => {
+                   return <Post title={post.title} contents={post.contents} key={index} />
+               })}
            </div>
         )
     }

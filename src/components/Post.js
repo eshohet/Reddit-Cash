@@ -14,8 +14,8 @@ class Post extends Component {
                 <Col sm="12">
                     <Card>
                         <CardBody>
-                            <CardTitle>Special Title Treatment</CardTitle>
-                            <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                            <CardTitle>{this.props.title}</CardTitle>
+                            <CardText>{this.props.contents}</CardText>
                         </CardBody>
                         <CardFooter>
                             <a href='#' className="float-right">Buy</a>
