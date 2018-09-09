@@ -7,9 +7,9 @@ contract CuratedBondedCurve is BondingCurve {
     uint32 public reserveRatio = 333333;
 
     constructor() public {
-        poolBalance = poolBalance.add(100);
-        totalSupply_ = totalSupply_.add(100);
-        balances[msg.sender] = balances[msg.sender].add(100);
+        poolBalance = poolBalance.add(1);
+        totalSupply_ = totalSupply_.add(1);
+        balances[msg.sender] = balances[msg.sender].add(1);
     }
 
     function buy() public payable returns(bool) {
@@ -19,6 +19,17 @@ contract CuratedBondedCurve is BondingCurve {
         balances[msg.sender] = balances[msg.sender].add(tokensToMint);
         poolBalance = poolBalance.add(msg.value);
         LogMint(tokensToMint, msg.value);
+        return true;
+    }
+
+    function sell(uint256 sellAmount) public returns(bool) {
+        require(sellAmount > 0 && balances[msg.sender] >= sellAmount);
+        uint256 ethAmount = calculateSaleReturn(totalSupply_, poolBalance, reserveRatio, sellAmount);
+        msg.sender.transfer(ethAmount);
+        poolBalance = poolBalance.sub(ethAmount);
+        balances[msg.sender] = balances[msg.sender].sub(sellAmount);
+        totalSupply_ = totalSupply_.sub(sellAmount);
+        LogWithdraw(sellAmount, ethAmount);
         return true;
     }
 }

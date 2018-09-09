@@ -4,12 +4,10 @@ import "./CuratedBondedCurve.sol";
 
 contract RedditCash {
 
-    uint256 public postCount = 0;
-
-    event Publish(string ipfsHash, uint256 postNumber, address token);
+    event Publish(string ipfsHash, address token);
 
     function publish(string ipfsHash) payable public {
         CuratedBondedCurve token = new CuratedBondedCurve();
-        emit Publish(ipfsHash, postCount++, address(token));
+        emit Publish(ipfsHash, address(token));
     }
 }
