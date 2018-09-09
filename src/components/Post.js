@@ -64,7 +64,7 @@ class Post extends Component {
     sell = () => {
         const ipfsHash = this.props.ipfsHash;
         console.log(`user wants to sell ${ipfsHash} @ ${this.props.tokenAddress}`);
-        this.state.curatedBondedCurveInstance.methods.sell(100).send({
+        this.state.curatedBondedCurveInstance.methods.sell(this.state.tokenBalance).send({
             from: this.context.drizzle.store.getState().accounts[0]
         });
     };
