@@ -32,23 +32,13 @@ class RedditNavBar extends Component {
                             <NavItem>
                                 <NavLink onClick={this.props.submitPost}>Submit Post</NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-                            </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
-                                    Options
+                                    My Account
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                     <DropdownItem>
-                                        Option 1
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        Option 2
-                                    </DropdownItem>
-                                    <DropdownItem divider />
-                                    <DropdownItem>
-                                        Reset
+                                        Portfolio
                                     </DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>

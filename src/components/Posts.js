@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from "proptypes/src";
 import {drizzleConnect} from "drizzle-react";
-import {Post} from "./Post";
+import Post from "./Post";
 const IPFS = require('ipfs');
 
 
@@ -26,12 +26,14 @@ class Posts extends Component {
             }, ((error, logs) => {
                 logs.map((log) => {
                     const ipfsHash = log.returnValues.ipfsHash;
+                    const tokenAddress = log.returnValues.token;
+                    console.log(`fetching post ${ipfsHash}`);
                     node.files.cat(ipfsHash, (error, data) => {
                         if(!error) {
                             const raw = JSON.parse(data.toString());
                             const {title, contents} = raw;
                             this.setState({
-                                posts: [...this.state.posts, {title, contents}]
+                                posts: [...this.state.posts, {title, contents, ipfsHash, tokenAddress}]
                             });
                         }
                     });
@@ -39,6 +41,10 @@ class Posts extends Component {
                 })
             }));
         });
+
+        node.on('error', ((error) => {
+            console.log(error);
+        }))
 
 
 
@@ -49,7 +55,9 @@ class Posts extends Component {
         return (
            <div>
                {this.state.posts.map((post, index) => {
-                   return <Post title={post.title} contents={post.contents} key={index} />
+                   return <Post
+                       tokenAddress={post.tokenAddress} title={post.title} contents={post.contents} ipfsHash={post.ipfsHash} key={index}
+                   />
                })}
            </div>
         )

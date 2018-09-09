@@ -1,12 +1,15 @@
 pragma solidity^0.4.24;
 
-import "bancor-contracts/solidity/contracts/converter/BancorFormula.sol";
+import "./CuratedBondedCurve.sol";
 
-contract RedditCash is BancorFormula {
+contract RedditCash {
 
-    event Publish(string ipfsHash);
+    uint256 public postCount = 0;
 
-    function publish(string ipfsHash) public {
-        emit Publish(ipfsHash);
+    event Publish(string ipfsHash, uint256 postNumber, address token);
+
+    function publish(string ipfsHash) payable public {
+        CuratedBondedCurve token = new CuratedBondedCurve();
+        emit Publish(ipfsHash, postCount++, address(token));
     }
 }

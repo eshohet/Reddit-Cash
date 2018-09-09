@@ -1,4 +1,5 @@
 import RedditCash from './../build/contracts/RedditCash.json'
+import CuratedBondedCurve from './../build/contracts/CuratedBondedCurve.json'
 
 const drizzleOptions = {
     web3: {
@@ -9,7 +10,8 @@ const drizzleOptions = {
         }
     },
     contracts: [
-        RedditCash
+        RedditCash,
+        CuratedBondedCurve
     ],
     events: {
         Prices: ['Publish']
