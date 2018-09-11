@@ -45,8 +45,13 @@ class Posts extends Component {
                                 this.contracts.CuratedBondedCurve.abi, tokenAddress
                             );
 
+                            const tokenBalance = await curatedBondedCurveInstance.methods.balanceOf(context.drizzle.store.getState().accounts[0]).call();
                             const totalSupply = await curatedBondedCurveInstance.methods.totalSupply().call();
-
+                            const poolBalance = await curatedBondedCurveInstance.methods.poolBalance().call();
+                            const reserveRatio = await curatedBondedCurveInstance.methods.reserveRatio().call();
+                            const sellValue = await curatedBondedCurveInstance.methods.calculateSaleReturn(
+                                totalSupply, poolBalance, reserveRatio, parseInt(tokenBalance, 10)
+                            ).call();
                             this.setState({
                                 posts: [...this.state.posts, {
                                     title,
@@ -54,7 +59,9 @@ class Posts extends Component {
                                     ipfsHash,
                                     tokenAddress,
                                     totalSupply: new this.drizzle.web3.utils.BN(totalSupply),
-                                    timestamp
+                                    timestamp,
+                                    sellValue,
+                                    tokenBalance
                                 }]
                             });
                         }
@@ -113,6 +120,8 @@ class Posts extends Component {
                         contents={post.contents}
                         ipfsHash={post.ipfsHash}
                         timestamp={post.timestamp}
+                        tokenBalance={post.tokenBalance}
+                        sellValue={post.sellValue}
                         key={post.tokenAddress}
                     />
                 })}

@@ -16,27 +16,8 @@ class Post extends Component {
             this.contracts.CuratedBondedCurve.abi, this.props.tokenAddress
         );
 
-        //get the current token balance for this post
-        curatedBondedCurveInstance.methods.balanceOf(context.drizzle.store.getState().accounts[0]).call(async (e, tokenBalance) => {
-            this.setState({
-                tokenBalance: parseInt(tokenBalance, 10)
-            });
-
-            //grab value of tokens depending on what you'd get if you sold them
-            const totalSupply = await curatedBondedCurveInstance.methods.totalSupply().call();
-            const poolBalance = await curatedBondedCurveInstance.methods.poolBalance().call();
-            const reserveRatio = await curatedBondedCurveInstance.methods.reserveRatio().call();
-            const sellValue = await curatedBondedCurveInstance.methods.calculateSaleReturn(
-                totalSupply, poolBalance, reserveRatio, parseInt(tokenBalance, 10)
-            ).call();
-            this.setState({
-                sellValue
-            });
-        });
-
         this.state = {
             curatedBondedCurveInstance,
-            sellValue: "0"
         };
 
         //setup listening for incoming events
@@ -130,7 +111,7 @@ class Post extends Component {
                             <Button color="danger" onClick={this.sell} className="float-right">Sell</Button>
                             <Button color="success" onClick={this.buy} style={{marginRight: 10}}
                                     className="float-right">Buy</Button>
-                            {this.state.tokenBalance} ({this.drizzle.web3.utils.fromWei(this.state.sellValue, "ether")} ETH)
+                            {this.props.tokenBalance} ({this.drizzle.web3.utils.fromWei(this.props.sellValue, "ether")} ETH)
                         </CardFooter>
                     </Card>
                 </Col>
