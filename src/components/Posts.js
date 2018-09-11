@@ -90,15 +90,14 @@ class Posts extends Component {
             case 'top':
                 if (a.totalSupply.gt(b.totalSupply))
                     returnValue = -1;
-                if(a.totalSupply.eq(b.totalSupply))
+                if (a.totalSupply.eq(b.totalSupply))
                     returnValue = 0;
                 break;
             default: //hot
                 if (a.totalSupply.gt(b.totalSupply))
                     returnValue = -1;
-                if(a.totalSupply.eq(b.totalSupply))
+                if (a.totalSupply.eq(b.totalSupply))
                     returnValue = 0;
-                break;
         }
         return returnValue;
     };
