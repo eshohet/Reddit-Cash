@@ -38,6 +38,12 @@ class Post extends Component {
             curatedBondedCurveInstance,
             sellValue: "0"
         };
+
+        //setup listening for incoming events
+        //not yet supported by metamask
+        // curatedBondedCurveInstance.events.allEvents({fromBlock: 0, toBlock: 'pending'}, ((error, logs) => {
+        //     console.log(error, logs);
+        // }));
     }
 
     buy = async () => {
@@ -57,7 +63,28 @@ class Post extends Component {
             this.state.curatedBondedCurveInstance.methods.buy().send({
                 value: this.drizzle.web3.utils.toWei(price, 'ether'),
                 from: this.context.drizzle.store.getState().accounts[0]
-            });
+            }, ((error, data) => {
+
+                const toast = swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                if(error) {
+                    toast({
+                        type: 'error',
+                        title: 'User denied transaction'
+                    });
+                }
+                else {
+                    toast({
+                        type: 'success',
+                        title: 'This post has just been purchased!'
+                    });
+                }
+            }));
         }
     };
 
@@ -66,7 +93,28 @@ class Post extends Component {
         console.log(`user wants to sell ${ipfsHash} @ ${this.props.tokenAddress}`);
         this.state.curatedBondedCurveInstance.methods.sell(this.state.tokenBalance).send({
             from: this.context.drizzle.store.getState().accounts[0]
-        });
+        }, ((error, data) => {
+
+            const toast = swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            if(error) {
+                toast({
+                    type: 'error',
+                    title: 'User denied transaction'
+                });
+            }
+            else {
+                toast({
+                    type: 'success',
+                    title: 'This post has just been sold!'
+                });
+            }
+        }));
     };
 
     render() {
@@ -80,7 +128,8 @@ class Post extends Component {
                         </CardBody>
                         <CardFooter>
                             <Button color="danger" onClick={this.sell} className="float-right">Sell</Button>
-                            <Button color="success" onClick={this.buy} style={{marginRight: 10}} className="float-right">Buy</Button>
+                            <Button color="success" onClick={this.buy} style={{marginRight: 10}}
+                                    className="float-right">Buy</Button>
                             {this.state.tokenBalance} ({this.drizzle.web3.utils.fromWei(this.state.sellValue, "ether")} ETH)
                         </CardFooter>
                     </Card>
