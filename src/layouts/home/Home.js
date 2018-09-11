@@ -18,7 +18,8 @@ class Home extends Component {
         this.contracts = context.drizzle.contracts;
         this.state = {
             node: new IPFS(),
-            ipfsReady: false
+            ipfsReady: false,
+            sortMode: 'hot'
         };
 
         this.state.node.on('ready', () => {
@@ -82,12 +83,20 @@ class Home extends Component {
         );
     };
 
+    selectMode = (e) => {
+        const mode = (e.target.innerText.toLowerCase());
+        console.log(`${mode} sortMode selected`);
+        this.setState({
+            sortMode: mode
+        });
+    };
+
     render() {
         return (
             <Container>
-                <RedditNavBar submitPost={this.prepareSubmitPost}/>
+                <RedditNavBar submitPost={this.prepareSubmitPost} selectMode={this.selectMode}/>
                 <Announcements/>
-                {!this.state.submittingPost && <Posts/>}
+                {!this.state.submittingPost && <Posts sortMode={this.state.sortMode}/>}
                 {this.state.submittingPost && this.renderSubmitPost()}
                 <Footer />
             </Container>

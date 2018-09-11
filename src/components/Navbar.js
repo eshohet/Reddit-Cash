@@ -7,10 +7,7 @@ import {
     Nav,
     NavItem,
     NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
+} from 'reactstrap';
 
 class RedditNavBar extends Component {
 
@@ -26,17 +23,17 @@ class RedditNavBar extends Component {
             <div>
                 <Navbar color="light" light expand="md">
                     <NavbarBrand href="/">Reddit Cash</NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
+                    <NavbarToggler onClick={this.toggle}/>
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink onClick={this.props.submitPost}>Hot</NavLink>
+                                <NavLink onClick={this.props.selectMode}>Hot</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink onClick={this.props.submitPost}>Top</NavLink>
+                                <NavLink onClick={this.props.selectMode}>Top</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink onClick={this.props.submitPost}>New</NavLink>
+                                <NavLink onClick={this.props.selectMode}>New</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink onClick={this.props.submitPost}>Portfolio</NavLink>
