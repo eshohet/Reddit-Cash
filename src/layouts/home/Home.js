@@ -6,6 +6,7 @@ import PropTypes from "proptypes/src";
 import {drizzleConnect} from "drizzle-react";
 import swal from 'sweetalert2';
 import Posts from "../../components/Posts";
+import {Footer} from "../../components/Footer";
 
 const IPFS = require('ipfs');
 
@@ -100,6 +101,7 @@ class Home extends Component {
                 <RedditNavBar submitPost={this.prepareSubmitPost}/>
                 {!this.state.submittingPost && <Posts/>}
                 {this.state.submittingPost && this.renderSubmitPost()}
+                <Footer />
             </Container>
         )
     }
