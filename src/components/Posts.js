@@ -82,7 +82,7 @@ class Posts extends Component {
         let returnValue = 1;
         switch (this.state.sortMode) {
             case 'new':
-                if (a.timestamp < b.timestamp)
+                if (a.timestamp > b.timestamp)
                     returnValue = -1;
                 if (a.timestamp === b.timestamp)
                     returnValue = 0;
