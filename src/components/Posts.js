@@ -1,10 +1,8 @@
 import React, {Component} from 'react'
-import PropTypes from "proptypes/src";
+import PropTypes from "proptypes";
 import {drizzleConnect} from "drizzle-react";
 import Post from "./Post";
-
-const IPFS = require('ipfs');
-
+const IPFS = window.IPFS;
 
 class Posts extends Component {
 

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Button, Card, CardBody, CardFooter, CardText, CardTitle, Col, Row} from "reactstrap"
 import "../css/Post.css"
-import PropTypes from "proptypes/src";
+import PropTypes from "proptypes";
 import {drizzleConnect} from "drizzle-react";
 import swal from 'sweetalert2';
 

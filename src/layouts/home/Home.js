@@ -2,13 +2,12 @@ import React, {Component} from 'react'
 import {RedditNavBar} from "../../components/Navbar";
 import {Button, Card, CardBody, CardFooter, Col, Container, Form, FormGroup, Input, Label} from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import PropTypes from "proptypes/src";
+import PropTypes from "proptypes";
 import {drizzleConnect} from "drizzle-react";
 import Posts from "../../components/Posts";
 import {Footer} from "../../components/Footer";
 import {Announcements} from "../../components/Announcements";
-
-const IPFS = require('ipfs');
+const IPFS = window.IPFS;
 
 class Home extends Component {
 
