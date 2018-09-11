@@ -53,7 +53,7 @@ class Posts extends Component {
                                     contents,
                                     ipfsHash,
                                     tokenAddress,
-                                    totalSupply,
+                                    totalSupply: new this.drizzle.web3.utils.BN(totalSupply),
                                     timestamp
                                 }]
                             });
@@ -76,8 +76,6 @@ class Posts extends Component {
         this.setState({
             sortMode: nextProps.sortMode
         });
-
-        console.log(this.state.posts.sort(this.sort));
     }
 
     sort = (a, b) => {
@@ -90,15 +88,15 @@ class Posts extends Component {
                     returnValue = 0;
                 break;
             case 'top':
-                if (a.totalSupply > b.totalSupply)
+                if (a.totalSupply.gt(b.totalSupply))
                     returnValue = -1;
-                if(a.totalSupply === b.totalSupply)
+                if(a.totalSupply.eq(b.totalSupply))
                     returnValue = 0;
                 break;
             default: //hot
-                if (a.totalSupply > b.totalSupply)
+                if (a.totalSupply.gt(b.totalSupply))
                     returnValue = -1;
-                if(a.totalSupply === b.totalSupply)
+                if(a.totalSupply.eq(b.totalSupply))
                     returnValue = 0;
                 break;
         }
@@ -116,7 +114,7 @@ class Posts extends Component {
                         contents={post.contents}
                         ipfsHash={post.ipfsHash}
                         timestamp={post.timestamp}
-                        key={index}
+                        key={post.tokenAddress}
                     />
                 })}
             </div>
