@@ -4,7 +4,7 @@ import "relevant-contracts/contracts/BondingCurve.sol";
 
 contract CuratedBondedCurve is BondingCurve {
 
-    uint32 public reserveRatio = 333333;
+    uint32 public reserveRatio = 900000;
 
     constructor() public {
         poolBalance = poolBalance.add(1);
