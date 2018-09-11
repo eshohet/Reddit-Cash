@@ -6,6 +6,7 @@ import PropTypes from "proptypes/src";
 import {drizzleConnect} from "drizzle-react";
 import Posts from "../../components/Posts";
 import {Footer} from "../../components/Footer";
+import {Announcements} from "../../components/Announcements";
 
 const IPFS = require('ipfs');
 
@@ -85,6 +86,7 @@ class Home extends Component {
         return (
             <Container>
                 <RedditNavBar submitPost={this.prepareSubmitPost}/>
+                <Announcements/>
                 {!this.state.submittingPost && <Posts/>}
                 {this.state.submittingPost && this.renderSubmitPost()}
                 <Footer />

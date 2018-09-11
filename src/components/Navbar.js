@@ -30,18 +30,20 @@ class RedditNavBar extends Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
+                                <NavLink onClick={this.props.submitPost}>Hot</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink onClick={this.props.submitPost}>Top</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink onClick={this.props.submitPost}>New</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink onClick={this.props.submitPost}>Portfolio</NavLink>
+                            </NavItem>
+                            <NavItem>
                                 <NavLink onClick={this.props.submitPost}>Submit Post</NavLink>
                             </NavItem>
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
-                                    My Account
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                    <DropdownItem>
-                                        Portfolio
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
                         </Nav>
                     </Collapse>
                 </Navbar>
