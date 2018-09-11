@@ -112,7 +112,20 @@ class Posts extends Component {
     render() {
         return (
             <div>
-                {this.state.posts.sort(this.sort).map((post, index) => {
+                {this.state.sortMode !== 'portfolio' && this.state.posts.sort(this.sort).map((post, index) => {
+                    return <Post
+                        totalSupply={post.totalSupply}
+                        tokenAddress={post.tokenAddress}
+                        title={post.title}
+                        contents={post.contents}
+                        ipfsHash={post.ipfsHash}
+                        timestamp={post.timestamp}
+                        tokenBalance={post.tokenBalance}
+                        sellValue={post.sellValue}
+                        key={post.tokenAddress}
+                    />
+                })}
+                {this.state.sortMode === 'portfolio' && this.state.posts.filter(post => post.tokenBalance > 0).map((post, index) => {
                     return <Post
                         totalSupply={post.totalSupply}
                         tokenAddress={post.tokenAddress}

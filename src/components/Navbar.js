@@ -36,7 +36,7 @@ class RedditNavBar extends Component {
                                 <NavLink onClick={this.props.selectMode}>New</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink onClick={this.props.submitPost}>Portfolio</NavLink>
+                                <NavLink onClick={this.props.selectMode}>Portfolio</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink onClick={this.props.submitPost}>Submit Post</NavLink>
