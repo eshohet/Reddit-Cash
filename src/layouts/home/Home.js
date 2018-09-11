@@ -87,7 +87,8 @@ class Home extends Component {
         const mode = (e.target.innerText.toLowerCase());
         console.log(`${mode} sortMode selected`);
         this.setState({
-            sortMode: mode
+            sortMode: mode,
+            submittingPost: false
         });
     };
 
