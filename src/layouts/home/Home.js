@@ -4,7 +4,6 @@ import {Button, Card, CardBody, CardFooter, Col, Container, Form, FormGroup, Inp
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PropTypes from "proptypes/src";
 import {drizzleConnect} from "drizzle-react";
-import swal from 'sweetalert2';
 import Posts from "../../components/Posts";
 import {Footer} from "../../components/Footer";
 
@@ -56,18 +55,6 @@ class Home extends Component {
         });
 
         this.contracts.RedditCash.methods.publish.cacheSend(filesAdded[0].hash);
-
-        const toast = swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000
-        });
-
-        toast({
-            type: 'success',
-            title: 'Post was successful'
-        })
     };
 
     renderSubmitPost = () => {
