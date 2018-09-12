@@ -4,11 +4,11 @@ import { Router, Route } from 'react-router'
 import { DrizzleProvider } from 'drizzle-react'
 
 // Layouts
-import App from './App'
 import { LoadingContainer } from 'drizzle-react-components'
 
 import { history, store } from './store'
 import drizzleOptions from './drizzleOptions'
+import App from "./App";
 
 ReactDOM.render((
     <DrizzleProvider options={drizzleOptions} store={store}>
