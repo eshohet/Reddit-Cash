@@ -1,8 +1,10 @@
 {
   "name": "reddit-cash",
   "version": "1.0.0",
+  "homepage": "https://eshohet.github.io/Reddit-Cash/",
   "devDependencies": {
     "ganache-cli": "^6.1.8",
+    "gh-pages": "^1.2.0",
     "openzeppelin-solidity": "^1.12.0",
     "truffle": "^4.1.14",
     "truffle-hdwallet-provider": "^0.0.5"
@@ -79,7 +81,9 @@
     "start": "node scripts/start.js",
     "build": "truffle compile && node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "chain": "ganache-cli"
+    "chain": "ganache-cli",
+    "predeploy": "npm run build && truffle deploy",
+    "deploy": "cp -r build build_webpack && git add -f build_webpack/build/* && gh-pages -d build_webpack"
   },
   "jest": {
     "collectCoverageFrom": [
