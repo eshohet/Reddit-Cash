@@ -83,7 +83,8 @@
     "test": "node scripts/test.js --env=jsdom",
     "chain": "ganache-cli",
     "predeploy": "npm run build",
-    "deploy": "cp -r build build_webpack && git add -f build_webpack/build/* && gh-pages -d build_webpack"
+    "deploy": "gh-pages -d build_webpack"
+
   },
   "jest": {
     "collectCoverageFrom": [
