@@ -22,7 +22,7 @@ class RedditNavBar extends Component {
         return (
             <div>
                 <Navbar color="light" light expand="md">
-                    <NavbarBrand href="/">Reddit Cash</NavbarBrand>
+                    <NavbarBrand href="./">Reddit Cash</NavbarBrand>
                     <NavbarToggler onClick={this.toggle}/>
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
