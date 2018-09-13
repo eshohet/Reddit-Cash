@@ -98,6 +98,10 @@ class Post extends Component {
         }));
     };
 
+    formatMoney = (amount) => {
+        return (parseFloat(amount)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    };
+
     render() {
         return (
             <Row>
@@ -111,7 +115,7 @@ class Post extends Component {
                             <Button color="danger" onClick={this.sell} className="float-right">Sell</Button>
                             <Button color="success" onClick={this.buy} style={{marginRight: 10}}
                                     className="float-right">Buy</Button>
-                            {this.props.tokenBalance} ({this.drizzle.web3.utils.fromWei(this.props.sellValue, "ether")} ETH)
+                            {this.formatMoney(this.props.tokenBalance)} ({this.drizzle.web3.utils.fromWei(this.props.sellValue, "ether")} ETH)
                         </CardFooter>
                     </Card>
                 </Col>
