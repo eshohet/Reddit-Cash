@@ -8,7 +8,7 @@ import Posts from '../../components/Posts'
 import { Footer } from '../../components/Footer'
 import SubmitPost from '../SubmitPost'
 import { Announcements } from '../../components/Announcements'
-import { Route } from 'react-router'
+import { Route, Switch, Redirect } from 'react-router'
 import routes from '../../routes'
 
 const IPFS = window.IPFS
@@ -47,6 +47,8 @@ class Home extends Component {
             )
         })
 
+        console.log(filesAdded)
+
         this.contracts.RedditCash.methods.publish.cacheSend(filesAdded[0].hash)
         history.push(routes.home)
     }
@@ -66,11 +68,16 @@ class Home extends Component {
             <Container>
                 <RedditNavBar submitPost={this.navigateToSubmitPost} selectMode={this.selectMode} />
                 <Announcements />
-                <Route path={routes.posts} render={props => <Posts {...props} sortMode={this.state.sortMode} />} />
-                <Route
-                    path={routes.submitPost}
-                    render={props => <SubmitPost {...props} handleSubmitPost={this.submitPost} loading={ipfsReady} />}
-                />
+                <Switch>
+                    <Route
+                        path={routes.submitPost}
+                        render={props => (
+                            <SubmitPost {...props} handleSubmitPost={this.submitPost} loading={ipfsReady} />
+                        )}
+                    />
+                    <Route path={routes.posts} render={props => <Posts {...props} sortMode={this.state.sortMode} />} />
+                    <Redirect from={routes.home} to={routes.posts} />
+                </Switch>
                 <Footer />
             </Container>
         )
